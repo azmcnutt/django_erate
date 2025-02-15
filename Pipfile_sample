@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "~=5.1"
+django-crispy-forms = "~=2.3"
+crispy-bootstrap5 = "~=2024.10"
+Pillow = "~=11.1"
+django-localflavor = "~=4.0"
+# mysqlclient = "~=2.2"
+social-auth-app-django = "~=5.4"
+python-dateutil = "~=2.9"
+pytz = "~=2025"
+# djangorestframework = "~=3.14"
+# djangorestframework-api-key = "~=2.3"
+pysftp = "~=0.2"
+# django-q2 = "~=1.7"
+tzdata = "~=2025.1"
+
+[dev-packages]
+
+[requires]
