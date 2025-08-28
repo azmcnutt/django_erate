@@ -13,7 +13,7 @@ class OData:
         billed_entity_search = self.odata_service.query(self.entity_info)
         # query = query.filter(customers.physical_county.__eq__('Mohave'))
         # billed_entity_search = billed_entity_search.filter(entity.entity_number.startswith('143220'))
-        billed_entity_search = billed_entity_search.filter(self.entity_info.entity_number.__eq__(ben))
+        billed_entity_search = billed_entity_search.filter(self.entity_info.entity_number == str(ben))
         # billed_entity_search = billed_entity_search.filter(entity.entity_number.__eq__('212700'))
         # if not billed_entity_search:
         #     print('not found')

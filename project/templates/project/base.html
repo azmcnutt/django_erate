@@ -28,11 +28,7 @@
                 width: 160px;
             }
         </style>
-        {% if title %}
-        <title>BCSD {{ title }}</title>
-        {% else %}
-        <title>BCSD Intranet</title>
-        {% endif %}
+        <title>E-Rate Commander</title>
     </head>
     <body>
         <!-- Optional JavaScript -->
@@ -42,20 +38,10 @@
         <header class="site-header d-print-none">
             <nav class="navbar py-0 navbar-expand-md navbar-dark bg-steel">
                 <div class="container-fluid">
-                    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="p-1 text-decoration-none">
-                        <i class="bi bi-list site-header-icon"></i>
-                    </a>
-                    <img src="{% static 'project/logo.png' %}" class="rounded mx-auto" height="50px" alt="Company Logo">
-                    <a class="navbar-brand" href="{% url 'home' %}">BCSD15 Intranet</a>
+                    {% comment %} <img src="https://www.usac.org/wp-content/uploads/home/logo/usac_logo_horizontal_blue_rgb.png" class="rounded mx-auto" height="50px" alt="Company Logo"> {% endcomment %}
+                    <a class="navbar-brand ps-2" href="{% url 'core:home' %}">J and B's E-Rate Commander
                     <div class="collapse navbar-collapse">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="bi bi-house pe-1 site-header-icon" ></i>Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://www.bcsd15.org" target="_blank"><i class="bi bi-browser-chrome pe-1 site-header-icon"></i>District Website</a>
-                            </li>
-                        </ul>
+                        <a class="nav-link" aria-current="page" href="https://www.jandbs.com" target="_blank"><i class="bi bi-house pe-1 site-header-icon"></i>J and B's Website</a>
                     </div>
                     <div class="d-flex">
                         <ul class="navbar-nav me-auto pe-4">
@@ -64,60 +50,13 @@
                                 <a class="nav-link" href="{% url 'admin:index' %}"><i class="bi bi-database-lock pe-1 site-header-icon"></i>Admin</a>
                             </li>
                             {% endif %}
-                            {% if user.is_authenticated %}
-                            {% comment %} <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right pe-1 site-header-icon"></i>Logout</a>
-                            </li> {% endcomment %}
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <li class="nav-item">
-                                    <a onclick="this.closest('form').submit();return false;" class="nav-link" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right pe-1 site-header-icon"></i>Logout</a>
-                                </li>
-                            </form>
-                            {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right pe-1 site-header-icon"></i>Login</a>
-                            </li>
-                            {% endif %}
                         </ul>
-{#                        <form class="d-flex align-items-center" role="search">#}
-{#                            <input class="form-control me-2" type="search" placeholder="Search by Ticket Numer" aria-label="Search">#}
-{#                            <button class="btn btn-sm btn-outline-light" type="submit"><i class="bi bi-search site-header-icon"></i></button>#}
-{#                        </form>#}
-                        {% if user.is_authenticated %}
-                        <div class="d-flex">
-                            <ul class="navbar-nav me-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" role="button"><i class="bi bi-gear pe-1 site-header-icon"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        {% endif %}
                     </div>
                 </div>
             </nav>
         </header>
         <div class="container-fluid">
             <div class="row flex-nowrap">
-                <div class="col-auto px-0">
-                    <div id="sidebar" class="collapse collapse-horizontal show border-end">
-                        <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 site-side-bg">
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-person-square"></i> <span>Finduser</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-clock-fill"></i> <span>Auto Ticket</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-fuel-pump-diesel-fill"></i> <span>Fuel Pump</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-telephone-fill"></i> <span>Phone Alert</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-person-add"></i> <span>User Sync</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-clock-fill"></i> <span>Daily Check In</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-person-check-fill"></i> <span>Employee Mgr</span></a>
-                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate site-side-icon" data-bs-parent="#sidebar"><i class="bi bi-calendar-check-fill"></i> <span>Check In Calendar</span></a>
-{#                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-clock"></i> <span>Item</span></a>#}
-{#                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-archive"></i> <span>Item</span></a>#}
-{#                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-gear"></i> <span>Item</span></a>#}
-{#                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-calendar"></i> <span>Item</span></a>#}
-{#                            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-envelope"></i> <span>Item</span></a>#}
-                        </div>
-                    </div>
-                </div>
                 <main class="col ps-md-2 pt-2">
                     {% if messages %}
                     {% for message in messages %}
