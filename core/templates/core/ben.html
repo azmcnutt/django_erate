@@ -1,6 +1,70 @@
 {% extends "project/base.html" %}
 {% block content %}
         <div class="content-section">
-            Ben
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col">
+                        <h1>Billed Entity Info</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>BEN:</strong> {{ ben.entity_number }}
+                    </div>
+                    <div class="col">
+                        <strong>Entity Name:</strong> {{ ben.entity_name }}
+                    </div>
+                    <div class="col">
+                        <strong>Entity Type:</strong> {{ ben.entity_type }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>FCC Reg. Num.:</strong> {{ ben.fcc_registration_number }}
+                    </div>
+                    <div class="col">
+                        <strong>Status:</strong> {{ ben.status }}
+                    </div>
+                    <div class="col">
+                        <strong>Account Administrator:</strong> {{ ben.account_administrator_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Physical Address:</strong>
+                    </div>
+                    <div class="col">
+                        <strong>Mailing Address:</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ ben.physical_address }}
+                        {% if ben.physical_address_2 %}
+                        , {{ ben.physical_address_2 }}
+                        {% endif %}
+                        , {{ ben.physical_city }} 
+                        , {{ ben.physical_county }} County, 
+                        {{ ben.physical_state }} 
+                        {{ ben.physical_zipcode }}
+                        {% if ben.physical_zipcode_ext %}
+                        -{{ ben.physical_zipcode_ext }}
+                        {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ ben.mailing_address }}
+                        {% if ben.mailing_address_2 %}
+                        , {{ ben.mailing_address_2 }}
+                        {% endif %}
+                        , {{ ben.mailing_city }} 
+                        , {{ ben.mailing_county }} County, 
+                        {{ ben.mailing_state }} 
+                        {{ ben.mailing_zipcode }}
+                        {% if ben.mailing_zipcode_ext %}
+                        -{{ ben.mailing_zipcode_ext }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
 {% endblock content %}
