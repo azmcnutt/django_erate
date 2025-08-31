@@ -10,6 +10,10 @@ class OData:
         self.entity_info = self.odata_service.entities['7i5i-83qf']
 
     def get_ben(self, ben):
+        date_attr = [
+            'fcc_form_498_status_date_time',
+            'last_updated_date',
+        ]
         billed_entity_search = self.odata_service.query(self.entity_info)
         # query = query.filter(customers.physical_county.__eq__('Mohave'))
         # billed_entity_search = billed_entity_search.filter(entity.entity_number.startswith('143220'))
@@ -27,7 +31,14 @@ class OData:
                     and not attr.startswith('parent_entity')
                     and attr not in entity
                 ):
-                    entity[attr] = getattr(billed_entity, attr)
+                    if attr in date_attr:
+                        if getattr(billed_entity, attr):
+                            try:
+                                entity[attr] = datetime.fromisoformat(getattr(billed_entity, attr).replace('Z', '+00:00'))
+                            except ValueError:
+                                entity[attr] = getattr(billed_entity, attr)
+                    else:
+                        entity[attr] = getattr(billed_entity, attr)
             # if 'ben' not in entity:
             #     entity['ben'] = billed_entity.entity_number
             # if 'name' not in entity:

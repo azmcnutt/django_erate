@@ -1,11 +1,19 @@
-body {
+:root {
+  --site-bg-color: #333333;
+  --site-txt-color: #fafafa;
+  --site-border-color: #222222;
+  --site-header-bg-color: #5f788a;
+  --site-header-bg-dark-color: #495b68;
+}
+
+body, .breadcrumb-item.active, .accordion-item {
     /* light mode
     background: #fafafa;
     color: #333333; */
 
     /* darkmode */
-    background: #333333;
-    color: #fafafa;
+    background: var(--site-bg-color);
+    color: var(--site-txt-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -16,8 +24,21 @@ ul {
     margin: 0;
 }
 
+.accordion-header {
+    --bs-accordion-border-color: var(--site-border-color);
+    --bs-accordion-active-bg: var(--site-header-bg-color);
+    --bs-accordion-active-color: var(--site-txt-color);
+    --bs-accordion-btn-bg: var(--site-header-bg-dark-color);
+    --bs-accordion-btn-color: var(--site-txt-color);
+    
+}
+
 .bg-steel {
-    background-color: #5f788a;
+    background-color: var(--site-header-bg-color);
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: var(--site-txt-color);
 }
 
 .site-header .navbar-nav .nav-link {
@@ -49,7 +70,7 @@ ul {
 .content-section {
     background: #444444;
     padding: 10px 20px;
-    border: 1px solid #222222;
+    border: 1px solid var(--site-border-color);
     border-radius: 3px;
     margin-bottom: 20px;
 }

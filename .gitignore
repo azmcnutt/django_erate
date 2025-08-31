@@ -1,6 +1,7 @@
 # Project files
 Pipfile
 project/settings.py
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

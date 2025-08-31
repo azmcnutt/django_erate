@@ -1,7 +1,12 @@
 {% extends "project/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-        <div class="content-section">
-            {% crispy form %}
-        </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+</nav>
+<div class="content-section">
+    {% crispy form %}
+</div>
 {% endblock content %}

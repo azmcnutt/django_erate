@@ -1,32 +1,55 @@
 {% extends "project/base.html" %}
+{% load core_tags %}
+{% block title %}BEN {{ ben.entity_name }} ({{ ben.entity_number }}){% endblock title %}
 {% block content %}
-        <div class="content-section">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col">
-                        <h1>Billed Entity Info</h1>
-                    </div>
-                </div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ ben.entity_name }}: {{ ben.entity_number }} </li>
+    </ol>
+</nav>
+<div class="content">
+    <div class="row text-center">
+        <div class="col">
+            <h2>{{ ben.entity_name }}: {{ ben.entity_number }} ({{ ben.entity_type }})</h2>
+        </div>
+    </div><div class="row">
+        <div class="col">
+            USAC Data Last Updated by: {{ ben.entity_last_modified_by }} on {{ ben.last_updated_date|date:'Y-m-d' }}
+        </div>
+    </div>
+</div>
+<div class="accordion" id="benaccordian">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingBasic">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBasic" aria-expanded="true" aria-controls="collapseOne">
+                Basic Entity Information
+            </button>
+        </h2>
+        <div id="collapseBasic" class="accordion-collapse collapse show" aria-labelledby="headingBasic" data-bs-parent="#benaccordian">
+            <div class="accordion-body">
                 <div class="row">
-                    <div class="col">
-                        <strong>BEN:</strong> {{ ben.entity_number }}
-                    </div>
-                    <div class="col">
-                        <strong>Entity Name:</strong> {{ ben.entity_name }}
-                    </div>
-                    <div class="col">
-                        <strong>Entity Type:</strong> {{ ben.entity_type }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <strong>FCC Reg. Num.:</strong> {{ ben.fcc_registration_number }}
-                    </div>
                     <div class="col">
                         <strong>Status:</strong> {{ ben.status }}
                     </div>
                     <div class="col">
                         <strong>Account Administrator:</strong> {{ ben.account_administrator_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Phone Number:</strong> {{ ben.phone_number }}
+                    </div>
+                    <div class="col">
+                        <strong>Website URL:</strong> {{ ben.website_url }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Entity Email:</strong> {{ ben.email }}
+                    </div>
+                    <div class="col">
+                        <strong>General Contact:</strong> {{ ben.general_contact_name }} {{ ben.general_contact_email }}
                     </div>
                 </div>
                 <div class="row">
@@ -44,7 +67,12 @@
                         , {{ ben.physical_address_2 }}
                         {% endif %}
                         , {{ ben.physical_city }} 
-                        , {{ ben.physical_county }} County, 
+                        , {{ ben.physical_county }}
+                        {% if ben.physical_county|iends_with:'county' %}
+                        , 
+                        {% else %}
+                            County, 
+                        {% endif %}
                         {{ ben.physical_state }} 
                         {{ ben.physical_zipcode }}
                         {% if ben.physical_zipcode_ext %}
@@ -57,7 +85,12 @@
                         , {{ ben.mailing_address_2 }}
                         {% endif %}
                         , {{ ben.mailing_city }} 
-                        , {{ ben.mailing_county }} County, 
+                        , {{ ben.mailing_county }}
+                        {% if ben.mailing_county|iends_with:'county' %}
+                        , 
+                        {% else %}
+                            County, 
+                        {% endif %} 
                         {{ ben.mailing_state }} 
                         {{ ben.mailing_zipcode }}
                         {% if ben.mailing_zipcode_ext %}
@@ -65,6 +98,51 @@
                         {% endif %}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>FCC Reg. Num.:</strong> {{ ben.fcc_registration_number }}
+                    </div>
+                    <div class="col">
+                        <strong>Most recent 498:</strong> {{ ben.fcc_form_498_form_number }}: {{ ben.form498_status }} ({{ ben.fcc_form_498_status_date_time|date:'Y-m-d' }})
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Lat / Lon:</strong> {{ ben.latitude }} / {{ ben.longitude }}
+                    </div>
+                    <div class="col">
+                        <strong>Urban-Rural Status (User Provided/USAC System Generated):</strong> {{ ben.user_entered_urban_rural_status }} / {{ ben.urban_rural_status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Cat One Discount:</strong> {{ ben.category_one_discount_rate }}
+                    </div>
+                    <div class="col">
+                        <strong>Cat Two Discount:</strong> {{ ben.category_two_discount_rate }}
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingExtra">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExtra" aria-expanded="false" aria-controls="collapseTwo">
+                Extra Entity Information
+            </button>
+        </h2>
+        <div id="collapseExtra" class="accordion-collapse collapse" aria-labelledby="headingExtra" data-bs-parent="#benaccordian">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col">
+                        <strong>Status:</strong> {{ ben.status }}
+                    </div>
+                    <div class="col">
+                        <strong>Account Administrator:</strong> {{ ben.account_administrator_name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
