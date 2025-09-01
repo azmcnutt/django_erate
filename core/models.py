@@ -6,11 +6,39 @@ from core.choice import USAC_ENTITY_TYPE, USAC_ENTITY_STATUS, \
     USAC_498_STATUS, USAC_URBAN_RURAL, YESNO
 
 
+class ErateFundingYear(models.Model):
+    funding_year = models.CharField(
+        verbose_name='Funding Year',
+        help_text='The funding year for E-Rate (e.g., 2023).',
+        max_length=4,
+        unique=True,
+        required=True,
+        blank=False,
+    )
+    start_date = models.DateField(
+        verbose_name='Start Date',
+        help_text='The start date of the funding year.',
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    end_date = models.DateField(
+        verbose_name='End Date',
+        help_text='The end date of the funding year.',
+        unique=False,
+        null=False,
+        blank=False,
+    )
+
+    def __str__(self):
+        return self.funding_year
+
+
 class Enitity(models.Model):
     row_id = models.CharField(
         verbose_name='Entity Row ID',
         help_text='The Row ID from the USAC OData service for this BEN.',
-        max_length=255,
+        max_length=32,
         unique=True,
         required=True,
         blank=False,
@@ -202,7 +230,7 @@ class Enitity(models.Model):
     )
     mailing_city = models.CharField(
         verbose_name='Mailing City',
-        help_text='City of the entity’s mailing address.',
+        help_text='City of the entity\'s mailing address.',
         max_length=100,
         unique=False,
         null=True,
@@ -210,7 +238,7 @@ class Enitity(models.Model):
     )
     mailing_county = models.CharField(
         verbose_name='Mailing County',
-        help_text='County of the entity’s mailing address.',
+        help_text='County of the entity\'s mailing address.',
         max_length=100,
         unique=False,
         null=True,
@@ -218,7 +246,7 @@ class Enitity(models.Model):
     )
     mailing_state = models.CharField(
         verbose_name='Mailing State',
-        help_text='State of the entity’s mailing address.',
+        help_text='State of the entity\'s mailing address.',
         max_length=2,
         unique=False,
         null=True,
@@ -226,7 +254,7 @@ class Enitity(models.Model):
     )
     mailing_zipcode = models.CharField(
         verbose_name='Mailing Zip Code',
-        help_text='ZIP code of the entity’s mailing address.',
+        help_text='ZIP code of the entity\'s mailing address.',
         max_length=10,
         unique=False,
         null=True,
@@ -242,7 +270,7 @@ class Enitity(models.Model):
     )
     phone_number = models.CharField(
         verbose_name='Phone Number',
-        help_text='Entity’s phone number.',
+        help_text='Entity\'s phone number.',
         max_length=15,
         unique=False,
         null=True,
@@ -250,7 +278,7 @@ class Enitity(models.Model):
     )
     email_address = models.EmailField(
         verbose_name='Email',
-        help_text='Email address for the entity’s EPC profile.',
+        help_text='Email address for the entity\'s EPC profile.',
         max_length=255,
         unique=False,
         null=True,
@@ -258,7 +286,7 @@ class Enitity(models.Model):
     )
     website_url = models.URLField(
         verbose_name='Website URL',
-        help_text='Entity’s website.',
+        help_text='Entity\'s website.',
         max_length=255,
         unique=False,
         null=True,
@@ -336,7 +364,7 @@ class Enitity(models.Model):
     category_one_discount_rate = models.DecimalField(
         verbose_name='Category One Discount Rate',
         help_text=(
-            'Discount rate for Category One services, per the entity’s '
+            'Discount rate for Category One services, per the entity\'s '
             'EPC profile. Services discounted by this rate include '
             'Internet Access Services and/or Data Transmission but do '
             'not include Voice Services. Only applicable to '
@@ -351,7 +379,7 @@ class Enitity(models.Model):
     category_two_discount_rate = models.DecimalField(
         verbose_name='Category Two Discount Rate',
         help_text=(
-            'Discount rate for Category Two services, per the entity’s '
+            'Discount rate for Category Two services, per the entity\'s '
             'EPC profile. Services discounted by this rate include '
             'Internal Connections, Managed Internal Broadband Services '
             '(MIBS) and/or Basic Maintenance of Internal Connections. '
@@ -438,7 +466,7 @@ class Enitity(models.Model):
     c2_district_student_count = models.IntegerField(
         verbose_name='C2 District Student Count',
         help_text=(
-            'Number of full time students for a school district’s C2 '
+            'Number of full time students for a school district\'s C2 '
             'Budget calculation based on the entity profile or an '
             'approved FCC Form 471.'
         ),
@@ -450,7 +478,7 @@ class Enitity(models.Model):
         verbose_name='C2 School Student Count',
         help_text=(
             'Number of full time students for independent or dependent '
-            'schools’ C2 budget calculations based on the entity '
+            'schools\' C2 budget calculations based on the entity '
             'profile or an approved FCC Form 471.'
         ),
         unique=False,
@@ -591,7 +619,7 @@ class Enitity(models.Model):
         help_text=(
             'Code assigned by the Institute for Museum and Library '
             'Services (IMLS) that identifies the population density of '
-            'the library’s location. Libraries that are located in the '
+            'the library\'s location. Libraries that are located in the '
             'IMLS locale code of 11-City, Large; 12-City, Midsize; or '
             '21-Suburb are eligible for a higher pre-discount budget '
             'than libraries with other locale codes.'
@@ -836,7 +864,7 @@ class Enitity(models.Model):
     alternative_discount_method = models.BooleanField(
         verbose_name='Alternative Discount Method',
         help_text=(
-            'Indicates the school’s alternative discount method such '
+            'Indicates the school\'s alternative discount method such '
             'as sibling match, survey, or combination (not CEP).'
         ),
         choices=YESNO,
@@ -1045,7 +1073,7 @@ class Enitity(models.Model):
         verbose_name='Tribal Affiliation',
         help_text=(
             'Selected name of the federally recognized Tribal Nation '
-            'that the entity is affiliated with from the entity’s EPC '
+            'that the entity is affiliated with from the entity\'s EPC '
             'profile listed drop down options.'
         ),
         max_length=100,
@@ -1069,7 +1097,7 @@ class Enitity(models.Model):
         verbose_name='Entity Last Modified By',
         help_text=(
             'Indicates the e-mail address of the person who last '
-            'modified the entity’s information in EPC.'
+            'modified the entity\'s information in EPC.'
         ),
         max_length=255,
         unique=False,
@@ -1113,6 +1141,14 @@ class Enitity(models.Model):
 
 
 class Annex(models.Model):
+    row_id = models.CharField(
+        verbose_name='Annex Row ID',
+        help_text='The Row ID from the USAC OData service for this Annex.',
+        max_length=32,
+        unique=True,
+        required=True,
+        blank=False,
+    )
     entity = models.ForeignKey(
         Enitity,
         on_delete=models.CASCADE,
@@ -1189,7 +1225,7 @@ class Annex(models.Model):
         verbose_name='Annex Last Modified By',
         help_text=(
             'E-mail address of the person who last modified the '
-            'annex’s information in EPC.'
+            'annex\'s information in EPC.'
         ),
         max_length=255,
         unique=False,
@@ -1230,6 +1266,404 @@ class Annex(models.Model):
     
     def get_absolute_url(self):
         return reverse('core:annex', kwargs={'pk': self.pk})
+
+
+class ServiceProvider(models.Model):
+    row_id = models.CharField(
+        verbose_name='Service Provider Row ID',
+        help_text=(
+            'The Row ID from the USAC OData service for this Service '
+            'Provider.'
+        ),
+        max_length=32,
+        unique=True,
+        required=True,
+        blank=False,
+    )
+    spin = models.CharField(
+        verbose_name='SPIN',
+        help_text=(
+            'Unique identification number for a service provider at a '
+            'USAC.'
+        ),
+        max_length=10,
+        unique=True,
+        null=False,
+        blank=False,
+    )
+    service_provider_name = models.CharField(
+        verbose_name='Service Provider Name',
+        help_text=(
+            'The name of the service provider associated with the SPIN.'
+        ),
+        max_length=255,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    status = models.BooleanField(
+        verbose_name='Status',
+        help_text='The status of the service provider.',
+        choices=USAC_ENTITY_STATUS,
+        default=True,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    doing_business_as_dba_ = models.CharField(
+        verbose_name='Doing Business As (DBA)',
+        help_text=(
+            'The current name of the service provider, which may be '
+            'different from its official name.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    fcc_registration_number = models.CharField(
+        verbose_name='FCC Registration Number',
+        help_text=(
+            'The unique identification number for the service provider '
+            'in its relations with the Federal Communications '
+            'Commission (FCC).'
+        ),
+        max_length=10,
+        unique=True,
+        null=False,
+        blank=False,
+    )
+    general_contact_email = models.EmailField(
+        verbose_name='General Contact Email',
+        help_text=(
+            'Email address associated with the person listed as '
+            'general contact for the service provider for the E-Rate '
+            'program.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    general_contact_name = models.CharField(
+        verbose_name='General Contact Name',
+        help_text=(
+            'Name of the person listed as general contact for the '
+            'service provider for the E-Rate program.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    account_administrator_email = models.EmailField(
+        verbose_name='Account Administrator Email',
+        help_text=(
+            'Email address associated with the person listed as the '
+            'account administrator for the service provider.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    account_administrator_name = models.CharField(
+        verbose_name='Account Administrator Name',
+        help_text=(
+            'Name of the person listed as the account administrator '
+            'for the service provider.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    phone_number = models.CharField(
+        verbose_name='Phone Number',
+        help_text='Phone number listed for service provider.',
+        max_length=15,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_address_1 = models.CharField(
+        verbose_name='Mailing Address 1',
+        help_text=(
+            'First line of the address listed for the service '
+            'provider, for mailing purposes.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_address_2 = models.CharField(
+        verbose_name='Mailing Address 2',
+        help_text=(
+            'Second line of the address listed for the service '
+            'provider, for mailing purposes.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_city = models.CharField(
+        verbose_name='Mailing City',
+        help_text=(
+            'City listed for the service provider, for mailing '
+            'purposes.'
+        ),
+        max_length=100,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_state = models.CharField(
+        verbose_name='Mailing State',
+        help_text=(
+            'State listed for the service provider, for mailing '
+            'purposes.'
+        ),
+        max_length=2,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_zip_code = models.CharField(
+        verbose_name='Mailing Zip Code',
+        help_text=(
+            'ZIP Code listed for the service provider, for mailing '
+            'purposes.'
+        ),
+        max_length=10,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    mailing_zip_code_extension = models.CharField(
+        verbose_name='Mailing ZIP Code Extension',
+        help_text=(
+            'Four-digit ZIP Code extension listed for the service '
+            'provider, for mailing purposes.'
+        ),
+        max_length=4,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_address_1 = models.CharField(
+        verbose_name='Physical Address 1',
+        help_text=(
+            'First line of the address listed for the service '
+            'provider\'s physical location.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_address_2 = models.CharField(
+        verbose_name='Physical Address 2',
+        help_text=(
+            'Second line of the address listed for the service '
+            'provider\'s physical location.'
+        ),
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_city = models.CharField(
+        verbose_name='Physical City',
+        help_text=(
+            'City listed for the service provider\'s physical location.'
+        ),
+        max_length=100,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_state = models.CharField(
+        verbose_name='Physical State',
+        help_text=(
+            'State listed for the service provider\'s physical location.'
+        ),
+        max_length=2,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_zip_code = models.CharField(
+        verbose_name='Physical Zip Code',
+        help_text=(
+            'ZIP Code listed for the service provider\'s physical '
+            'location.'
+        ),
+        max_length=10,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    physical_zip_code_extension = models.CharField(
+        verbose_name='Physical ZIP Code Extension',
+        help_text=(
+            'Four-digit ZIP Code extension listed for the service '
+            'provider\'s physical location.'
+        ),
+        max_length=4,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    fcc_form_499_filer = models.BooleanField(
+        verbose_name='FCC Form 499 Filer',
+        help_text=(
+            'Indicates if the service provider is required to file an '
+            'FCC Form 499.'
+        ),
+        choices=YESNO,
+        default=False,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    fcc_form_473_spac_filed = models.ManyToManyField(
+        ErateFundingYear,
+        verbose_name='FCC Form 473 SPAC Filed',
+        help_text=(
+            'Lists the funding years for which the service provider '
+            'has filed an FCC Form 473.'
+        ),
+        related_name='spac_fy',
+        blank=True,
+    )
+    fcc_form_498_last_approved_date = models.DateTimeField(
+        verbose_name='FCC Form 498 Last Approved Date',
+        help_text=(
+            'The date that the service provider\'s last FCC Form 498 '
+            'was approved.'
+        ),
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    fcc_form_498_filed_with_uei = models.BooleanField(
+        verbose_name='FCC Form 498 Filed with UEI',
+        help_text=(
+            'Indicates if the service provider filed its FCC Form 498 '
+            'with a Unique Entity Identifier (UEI).'
+        ),
+        choices=YESNO,
+        default=False,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    last_updated_time = models.DateTimeField(
+        verbose_name='LLast Updated Time',
+        help_text=(
+            'The last time any information in the E-Rate Productivity '
+            'Center (EPC) profile was updated for the service provider.'
+        ),
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    created = models.DateTimeField(
+        verbose_name='Created',
+        help_text='The date and time this record was created in Djano.',
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        verbose_name='Updated',
+        help_text='The date and time this record was last updated in Django.',
+        auto_now=True,
+    )
+    
+    class Meta:
+        ordering = ('spin',)
+        verbose_name = 'Service Provider Information'
+        verbose_name_plural = 'Service Providers Information'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    
+    def __str__ (self):
+        return str(f'{self.spin}')
+    
+    def get_absolute_url(self):
+        return reverse('core:service_provider', kwargs={'pk': self.pk})
+
+
+class ConsultingFirm(models.Model):
+    consulting_firm_registration = models.CharField(
+        verbose_name='Consulting Firm Registration',
+        help_text='The consulting firm registration number.',
+        max_length=12,
+        unique=True,
+        null=False,
+        blank=False,
+    )
+    consulting_firm_name = models.CharField(
+        verbose_name='Consulting Firm Name',
+        help_text='The name of the consulting firm.',
+        max_length=255,
+        unique=False,
+        null=False,
+        blank=False,
+    )
+    consulting_firm_phone = models.CharField(
+        verbose_name='Consulting Firm Phone',
+        help_text='The phone number of the consulting firm.',
+        max_length=15,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    consulting_firm_phone_ext = models.CharField(
+        verbose_name='Consulting Firm Phone Extension',
+        help_text='The phone extension of the consulting firm.',
+        max_length=10,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    consulting_firm_email = models.EmailField(
+        verbose_name='Consulting Firm Email',
+        help_text='The email address of the consulting firm.',
+        max_length=255,
+        unique=False,
+        null=True,
+        blank=True,
+    )
+    created = models.DateTimeField(
+        verbose_name='Created',
+        help_text='The date and time this record was created in Djano.',
+        auto_now_add=True,
+    )
+    updated = models.DateTimeField(
+        verbose_name='Updated',
+        help_text='The date and time this record was last updated in Django.',
+        auto_now=True,
+    )
+    
+    class Meta:
+        ordering = ('consulting_firm_registration',)
+        verbose_name = 'Consulting Firm Information'
+        verbose_name_plural = 'Consulting Firms Information'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+    
+    def __str__ (self):
+        return str(f'{self.spin}')
+    
+    def get_absolute_url(self):
+        return reverse('core:consulting_firm', kwargs={'pk': self.pk})
+
+
+# https://opendata.usac.org/E-Rate/E-Rate-C2-Budget-Tool-Data-FY2021-/6brt-5pbv/about_data
 
 
 class UserEntity(models.Model):
