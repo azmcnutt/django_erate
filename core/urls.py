@@ -4,7 +4,8 @@ from core.views import Home, Ben
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
-    path('<int:ben>/', Ben.as_view(), name='ben'),
+    path('<int:pk>/', Ben.as_view(), name='ben'),
+    path('annex/<int:pk>/', Home.as_view(), name='annex'),
     # path('<int:pk>/', FinduserDetailView.as_view(), name='detail'),
     # path('username/<int:pk>/', UsernameDetailView.as_view(), name='username-detail'),
     # path('computername/<int:pk>/', ComputernameDetailView.as_view(), name='computername-detail'),
