@@ -4,6 +4,8 @@
   --site-border-color: #222222;
   --site-header-bg-color: #5f788a;
   --site-header-bg-dark-color: #495b68;
+  --bs-emphasis-color: #fafafa;
+  --bs-body-bg: #333333;
 }
 
 body, .breadcrumb-item.active, .accordion-item {
@@ -32,6 +34,11 @@ ul {
     --bs-accordion-btn-color: var(--site-txt-color);
     
 }
+
+/* .table {
+    --bs-table-bg: var(--site-bg-color);
+    --bs-table-color: var(--site-txt-color);
+} */
 
 .bg-steel {
     background-color: var(--site-header-bg-color);

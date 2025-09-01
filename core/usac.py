@@ -8,6 +8,7 @@ class OData:
         self.session = requests.Session()
         self.odata_service = ODataService(self.odata_url, reflect_entities=True, session=self.session)
         self.entity_info = self.odata_service.entities['7i5i-83qf']
+        self.annex_info = self.odata_service.entities['hwzi-t5nj']
 
     def get_ben(self, ben):
         date_attr = [
