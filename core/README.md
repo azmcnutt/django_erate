@@ -243,3 +243,13 @@ https://opendata.usac.org/E-Rate/E-Rate-Open-Competitive-Bidding-Basic-Informati
 'all_libraries',
 'form_version',
 ```
+## 470 Consortium Member Information
+If 470 entity type is consortium, check here for member entities
+https://opendata.usac.org/E-Rate/E-Rate-Open-Competitive-Bidding-Consortium-Entity-/363f-22uh/about_data
+
+## 470 Consultant Information
+Check here to see if there is a consultant associated with a 470
+https://opendata.usac.org/E-Rate/E-Rate-Open-Competitive-Bidding-Consultants-FCC-Fo/g55z-erud/about_data
+
+## 470 Services Requested
+https://opendata.usac.org/E-Rate/E-Rate-Open-Competitive-Bidding-Services-Requested/39tn-hjzv/about_data
