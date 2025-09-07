@@ -5,7 +5,7 @@ from core.views import Home, Ben
 urlpatterns = [
     path('', Home.as_view(), name='home'),
     path('ben/<int:id>/', Ben.as_view(), name='ben'),
-    path('annex/<int:id/', Home.as_view(), name='annex'),
+    path('annex/<int:id>/', Home.as_view(), name='annex'),
     path('serviceprovider/<int:id>/', Home.as_view(), name='service_provider'),
     path('form470/<int:id>/', Home.as_view(), name='form470basic'),
     # path('consultingfirm/<int:pk>/', Home.as_view(), name='consulting_firm'),

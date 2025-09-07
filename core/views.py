@@ -19,7 +19,7 @@ class Home(FormView):
 
     def get_success_url(self):
         ben = self.form.cleaned_data['ben']
-        return reverse('core:ben', kwargs={'ben': ben})
+        return reverse('core:ben', kwargs={'id': ben})
 
 class Ben(TemplateView):
     template_name: str = 'core/ben.html'

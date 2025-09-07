@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from odata.service import ODataService, Query
 
 class OData:
@@ -25,7 +26,7 @@ class OData:
         # str.startswith
         entity = {}
         for billed_entity in billed_entity_search:
-            billed_entity
+            entity['__id'] = getattr(billed_entity, '__id')
             for attr in dir(billed_entity):
                 if (
                     not attr.startswith('__') 
@@ -35,8 +36,9 @@ class OData:
                     if attr in date_attr:
                         if getattr(billed_entity, attr):
                             try:
-                                entity[attr] = datetime.fromisoformat(getattr(billed_entity, attr).replace('Z', '+00:00'))
+                                entity[attr] = datetime.fromisoformat(getattr(billed_entity, attr)).replace(tzinfo=ZoneInfo("America/New_York"))
                             except ValueError:
+                                print('e')
                                 entity[attr] = getattr(billed_entity, attr)
                     else:
                         entity[attr] = getattr(billed_entity, attr)
