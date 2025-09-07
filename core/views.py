@@ -26,6 +26,6 @@ class Ben(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        ben = Billed_Entity(self.kwargs.get('ben')).all
+        ben = Billed_Entity(self.kwargs.get('id')).all
         context['ben'] = ben
         return context
