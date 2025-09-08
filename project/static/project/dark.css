@@ -18,6 +18,10 @@ body, .breadcrumb-item.active, .accordion-item {
     color: var(--site-txt-color);
 }
 
+.form-text, .form-control, .form-control:focus, .form-select, .form-check-label {
+    color: var(--site-txt-color);
+}
+
 h1, h2, h3, h4, h5, h6 {
     color: #fbfbfb;
 }

@@ -1,11 +1,11 @@
 {% extends "project/base.html" %}
 {% load core_tags %}
-{% block title %}BEN {{ ben.entity_name }} ({{ ben.entity_number }}){% endblock title %}
 {% block content %}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'core:home' %}">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ ben.entity_name }}: {{ ben.entity_number }} </li>
+        <li class="breadcrumb-item">ODATA: {{ ben.id }}</li>
     </ol>
 </nav>
 <div class="content">
